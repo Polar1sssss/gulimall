@@ -36,7 +36,6 @@ public class SysConfigController extends AbstractController {
 	 * 所有配置列表
 	 */
 	@GetMapping("/list")
-	@RequiresPermissions("sys:config:list")
 	public R list(@RequestParam Map<String, Object> params){
 		PageUtils page = sysConfigService.queryPage(params);
 
@@ -48,7 +47,6 @@ public class SysConfigController extends AbstractController {
 	 * 配置信息
 	 */
 	@GetMapping("/info/{id}")
-	@RequiresPermissions("sys:config:info")
 	public R info(@PathVariable("id") Long id){
 		SysConfigEntity config = sysConfigService.getById(id);
 		
@@ -60,7 +58,6 @@ public class SysConfigController extends AbstractController {
 	 */
 	@SysLog("保存配置")
 	@PostMapping("/save")
-	@RequiresPermissions("sys:config:save")
 	public R save(@RequestBody SysConfigEntity config){
 		ValidatorUtils.validateEntity(config);
 
@@ -74,7 +71,6 @@ public class SysConfigController extends AbstractController {
 	 */
 	@SysLog("修改配置")
 	@PostMapping("/update")
-	@RequiresPermissions("sys:config:update")
 	public R update(@RequestBody SysConfigEntity config){
 		ValidatorUtils.validateEntity(config);
 		
@@ -88,7 +84,6 @@ public class SysConfigController extends AbstractController {
 	 */
 	@SysLog("删除配置")
 	@PostMapping("/delete")
-	@RequiresPermissions("sys:config:delete")
 	public R delete(@RequestBody Long[] ids){
 		sysConfigService.deleteBatch(ids);
 		
