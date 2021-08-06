@@ -22,7 +22,7 @@ public class GulimallElasticConfig {
     public RestHighLevelClient esRestClient() {
 
         RestClientBuilder builder = null;
-        builder = RestClient.builder(new HttpHost("192.168.146.128", 9200, "http"));
+        builder = RestClient.builder(new HttpHost("192.168.56.10", 9200, "http"));
         RestHighLevelClient client = new RestHighLevelClient(builder);
         return client;
     }

@@ -2,12 +2,14 @@ package com.hujtb.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
@@ -41,7 +43,10 @@ public class CategoryEntity implements Serializable {
 	private Integer catLevel;
 	/**
 	 * 是否显示[0-不显示，1显示]
+	 * value：逻辑未删除用值1表示
+	 * deval：逻辑删除用值0表示
 	 */
+	@TableLogic(value = "1", delval = "0")
 	private Integer showStatus;
 	/**
 	 * 排序
@@ -62,7 +67,9 @@ public class CategoryEntity implements Serializable {
 
 	/**
 	 * 菜单子分类
+	 * 如果为空就不返回
 	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	@TableField(exist = false)
 	private List<CategoryEntity> children;
 }

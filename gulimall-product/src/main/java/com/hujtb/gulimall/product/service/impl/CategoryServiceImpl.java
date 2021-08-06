@@ -1,7 +1,11 @@
 package com.hujtb.gulimall.product.service.impl;
 
+import com.hujtb.gulimall.product.service.CategoryBrandRelationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,6 +23,53 @@ import com.hujtb.gulimall.product.service.CategoryService;
 
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
+
+    @Autowired
+    CategoryBrandRelationService categoryBrandRelationService;
+
+    @Override
+    public void removeMenusByIds(List<Long> asList) {
+        // TODO 1、检查当前删除菜单是否被其他地方引用
+        baseMapper.deleteBatchIds(asList);
+    }
+
+    /**
+     * 根据catelogId查出完整路径
+     * @param catelogId
+     * @return
+     */
+    @Override
+    public Long[] findPathById(Long catelogId) {
+        List<Long> paths = new ArrayList<>();
+        List<Long> parentPath = findParentPath(paths, catelogId);
+        Collections.reverse(parentPath);
+        return parentPath.toArray(new Long[parentPath.size()]);
+    }
+
+    /**
+     * 级联更新所有关联的数据
+     * @param category
+     */
+    @Override
+    public void updateCascade(CategoryEntity category) {
+        this.updateById(category);
+        categoryBrandRelationService.updateCategory(category.getCatId(), category.getName());
+    }
+
+    /**
+     * 查找当前节点的父id
+     * @param paths
+     * @param currentId
+     * @return
+     */
+    private List<Long> findParentPath(List<Long> paths, Long currentId) {
+        paths.add(currentId);
+        CategoryEntity byId = this.getById(currentId);
+        if (byId.getParentCid() != 0) {
+            findParentPath(paths, byId.getParentCid());
+        }
+        return paths;
+    }
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {

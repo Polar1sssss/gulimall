@@ -5,7 +5,7 @@ spring:
     nacos:
       config:
         server-addr: 127.0.0.1:8848
-        namespace: 2e53beb5-af95-4eb3-83d3-2e1dc631ba23
+        namespace: 1ce0704b-1136-4c6a-add0-0756bf027231
         extension-configs:
           - data-id: datasource.yml
             group: dev
