@@ -6,6 +6,7 @@ import com.hujtb.common.utils.R;
 import com.hujtb.gulimall.product.entity.BrandEntity;
 import com.hujtb.gulimall.product.entity.CategoryBrandRelationEntity;
 import com.hujtb.gulimall.product.service.CategoryBrandRelationService;
+import com.hujtb.gulimall.product.vo.BrandVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +28,9 @@ public class CategoryBrandRelationController {
     /**
      * 获取当前品牌关联的所有分类列表
      */
-    @GetMapping(value = "/catelog/list")
+    @GetMapping(value = "/catalog/list")
     //@RequiresPermissions("product:categorybrandrelation:list")
-    public R catelogList(@RequestParam Map<String, Object> params, @RequestParam("brandId") Long brandId) {
+    public R catalogList(@RequestParam Map<String, Object> params, @RequestParam("brandId") Long brandId) {
 
         List<CategoryBrandRelationEntity> data = categoryBrandRelationService.
                 list(new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId));
@@ -39,28 +40,27 @@ public class CategoryBrandRelationController {
 
     /**
      * /product/categorybrandrelation/brands/list
-     * 1、Controller：处理请求，接收和效验数据
+     * 1、Controller：处理请求，接收和校验数据
      * 2、Service接收Controller传来的数据，进行业务处理
      * 3、Controller接收Service处理完的数据，封装页面指定的vo
      */
-//    @GetMapping(value = "/brands/list")
-//    public R relationBransList(@RequestParam(value = "catId",required = true) Long catId) {
-//
-//        List<BrandEntity> vos = categoryBrandRelationService.getBrandsByCatId(catId);
-//
-//        List<BrandVo> collect = vos.stream().map(item -> {
-//            BrandVo brandVo = new BrandVo();
-//            brandVo.setBrandId(item.getBrandId());
-//            brandVo.setBrandName(item.getName());
-//            return brandVo;
-//        }).collect(Collectors.toList());
-//
-//        return R.ok().put("data",collect);
-//    }
+    @GetMapping(value = "/brands/list")
+    public R relationBransList(@RequestParam(value = "catId",required = true) Long catId) {
 
+        List<BrandEntity> vos = categoryBrandRelationService.getBrandsByCatId(catId);
+
+        List<BrandVo> collect = vos.stream().map(item -> {
+            BrandVo brandVo = new BrandVo();
+            brandVo.setBrandId(item.getBrandId());
+            brandVo.setBrandName(item.getName());
+            return brandVo;
+        }).collect(Collectors.toList());
+
+        return R.ok().put("data",collect);
+    }
 
     /**
-     * 列表
+     * 获取分类与品牌关联的信息
      */
     @RequestMapping("/list")
     //@RequiresPermissions("product:categorybrandrelation:list")

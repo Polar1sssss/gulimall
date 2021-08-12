@@ -8,7 +8,7 @@ spring:
     nacos:
       server-addr: 127.0.0.1:8848
   application:
-    name: gulimall-memeber
+    name: gulimall-member
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:

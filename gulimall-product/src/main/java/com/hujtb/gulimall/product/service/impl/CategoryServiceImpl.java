@@ -34,14 +34,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     }
 
     /**
-     * 根据catelogId查出完整路径
-     * @param catelogId
+     * 根据catalogId查出完整路径
+     * @param catalogId
      * @return
      */
     @Override
-    public Long[] findPathById(Long catelogId) {
+    public Long[] findPathById(Long catalogId) {
         List<Long> paths = new ArrayList<>();
-        List<Long> parentPath = findParentPath(paths, catelogId);
+        List<Long> parentPath = findParentPath(paths, catalogId);
         Collections.reverse(parentPath);
         return parentPath.toArray(new Long[parentPath.size()]);
     }
