@@ -1,10 +1,9 @@
-package com.hujtb.gulimall.product.controller;
+package com.hujtb.gulimall.product.app;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.hujtb.gulimall.product.dao.AttrAttrgroupRelationDao;
 import com.hujtb.gulimall.product.entity.AttrEntity;
 import com.hujtb.gulimall.product.service.AttrAttrgroupRelationService;
 import com.hujtb.gulimall.product.service.AttrService;
@@ -83,7 +82,7 @@ public class AttrGroupController {
 
         Long catalogId = attrGroup.getCatalogId();
         Long[] catalogPath = categoryService.findPathById(catalogId);
-        attrGroup.setcatalogPath(catalogPath);
+        attrGroup.setCatalogPath(catalogPath);
         return R.ok().put("attrGroup", attrGroup);
     }
 

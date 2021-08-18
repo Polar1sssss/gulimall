@@ -59,7 +59,7 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
 
         //将信息保存到categoryBrandRelation中
         categoryBrandRelation.setBrandName(brandEntity.getName());
-        categoryBrandRelation.setcatalogName(categoryEntity.getName());
+        categoryBrandRelation.setCatalogName(categoryEntity.getName());
 
         // 保存到数据库中
         this.baseMapper.insert(categoryBrandRelation);

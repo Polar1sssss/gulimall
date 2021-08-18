@@ -6,10 +6,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 二级分类
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class catalog2Vo {
+public class Catalog2Vo {
     /**
      * 一级父分类的id
      */
@@ -18,12 +21,11 @@ public class catalog2Vo {
     /**
      * 三级子分类
      */
-    private List<Category3Vo> catalog3List;
+    private List<Catalog3Vo> catalog3List;
 
     private String id;
 
     private String name;
-
 
     /**
      * 三级分类vo
@@ -31,7 +33,7 @@ public class catalog2Vo {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Category3Vo {
+    public static class Catalog3Vo {
 
         /**
          * 父分类、二级分类id

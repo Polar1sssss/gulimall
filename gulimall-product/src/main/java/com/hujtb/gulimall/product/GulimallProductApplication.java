@@ -3,6 +3,7 @@ package com.hujtb.gulimall.product;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
@@ -33,8 +34,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *    编写自定义校验器 ListValueConstraintValue
  *    关联注解和校验器 @Constraint(validatedBy = { ListValueConstraintValue.class [可以指定多个不同类型校验器]})
  * 4.统一异常处理
- *
+ * 5.模板引擎
+ * 1）引入thymeleaf的starter，关闭缓存，能够实时更新数据
+ * 2）静态资源放在static文件夹下，就可以按照路径正常访问
+ * 3）页面放在templates文件夹下，直接访问，SpringBoot默认访问index
  */
+
 @MapperScan("com.hujtb.gulimall.product.dao")
 @EnableFeignClients(basePackages = "com.hujtb.gulimall.product.feign")
 @EnableDiscoveryClient
