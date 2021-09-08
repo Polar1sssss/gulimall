@@ -9,6 +9,7 @@ spring:
         server-addr: 127.0.0.1:8848
     gateway:
       routes:
+        # 商品路由
         - id: product_route
           uri: lb://gulimall-product
           predicates:
@@ -48,4 +49,20 @@ spring:
         - id: gulimall_host_route
           uri: lb://gulimall-product
           predicates:
-            - Host=**.gulimall.com,gulimall.com
+            - Host=gulimall.com, item.gulimall.com
+
+        - id: gulimall_search_route
+          uri: lb://gulimall-search
+          predicates:
+            - Host=search.gulimall.com
+
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

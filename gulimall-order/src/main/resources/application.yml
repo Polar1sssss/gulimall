@@ -4,10 +4,36 @@ spring:
     password: root
     url: jdbc:mysql://192.168.56.10:3306/gulimall_oms
     driver-class-name: com.mysql.jdbc.Driver
+  rabbitmq:
+    host: 192.168.56.10
+    port: 5672
+    virtual-host: /
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true # 只要抵达队列，以异步发送的方式优先回调returnCallback
+    listener:
+      simple:
+        acknowledge-mode: manual
+
+  jackson:
+    date-format: "yyyy-MM-dd"
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
+
 server:
   port: 9000
+
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: *
+
+feign:
+  sentinel:
+    enabled: true

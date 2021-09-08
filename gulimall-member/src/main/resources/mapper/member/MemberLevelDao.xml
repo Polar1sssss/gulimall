@@ -17,5 +17,7 @@
         <result property="note" column="note"/>
     </resultMap>
 
-
+    <select id="getDefaultLevel" resultType="com.hujtb.gulimall.member.entity.MemberLevelEntity">
+        select * from `ums_member_level` where defautl_status=1
+    </select>
 </mapper>

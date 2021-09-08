@@ -13,5 +13,24 @@
         <result property="attrSort" column="attr_sort"/>
     </resultMap>
 
+    <resultMap id="skuItemSaleAttrVo" type="com.hujtb.gulimall.product.vo.SkuItemSaleAttrVo">
+        <result property="attrId" column="attr_id"></result>
+        <result property="attrName" column="attr_name"></result>
+        <collection property="attrValues" ofType="com.hujtb.gulimall.product.vo.AttrValueWithSkuIdVo">
+            <result property="attrValue" column="attr_value"></result>
+            <result property="skuIds" column="sku_ids"></result>
+        </collection>
+    </resultMap>
 
+    <!--当前spuId对应的销售属性-->
+    <select id="getSaleAttrsBySpuId" resultMap="skuItemSaleAttrVo">
+        select ssav.`attr_id` attr_id,
+               ssav.`attr_name` attr_name,
+               ssav.`attr_value` attr_value,
+               group_concat(distinct info.`sku_id`) sku_ids
+        from `pms_sku_info` info
+        left join `pms_sku_sale_attr_value` ssav on ssav.`sku_id` = info.`sku_id`
+        where info.`spu_id` = {spuId}
+        group by ssav.`attr_id`,ssav.`attr_name`,ssav.`attr_value`
+    </select>
 </mapper>

@@ -7,8 +7,10 @@ spring:
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
-  application:
-    name: gulimall-product
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8333
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   thymeleaf:
@@ -22,7 +24,19 @@ spring:
       cache-null-values: true
       #key-prefix: CACHE_
       use-key-prefix: true
-
+  application:
+    name: gulimall-product
+  zipkin:
+    base-url: http://192.168.56.10:9411/
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当作服务地址
+    discoveryClientEnabled: false
+    sender:
+      type: web # 设置使用http的方式传输数据
+  sleuth:
+    sampler:
+      probability: 1 # 设置抽样采集率为100%，默认为0.1
+  session:
+    store-type: redis # 指定session存到redis中
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -36,3 +50,21 @@ server:
 logging:
   level:
     root: info
+    org.springframework.cloud.openfeign: debug
+    org.springframework.cloud.sleuth: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+feign:
+  sentinel:
+    enabled: true
+
+hujtb:
+  thread:
+    core-size: 10
+    max-size: 100
+    keep-alive-time: 10

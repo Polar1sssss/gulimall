@@ -16,3 +16,13 @@ mybatis-plus:
       id-type: auto
 server:
   port: 8000
+
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

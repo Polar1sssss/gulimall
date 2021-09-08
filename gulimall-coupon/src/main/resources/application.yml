@@ -17,3 +17,13 @@ mybatis-plus:
 
 server:
   port: 7000
+
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

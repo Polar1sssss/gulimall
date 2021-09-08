@@ -10,6 +10,13 @@ spring:
       secret-key: KfUUkCsllO6qu1GMFCFoVmh3kktmqMjtuhb
       oss:
         endpoint: oss-cn-beijing.aliyuncs.com
+      sms:
+        host: https://smsmsgs.market.alicloudapi.com
+        path: /sms/
+        skin: 1
+        sign: 1
+        appcode:
+
   application:
     name: gulimall-third-party
 
