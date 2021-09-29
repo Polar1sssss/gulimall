@@ -21,13 +21,8 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class MyRabbitConfig {
 
-    // @Autowired
-    RabbitTemplate rabbitTemplate;
-
-//    public MyRabbitConfig(RabbitTemplate rabbitTemplate) {
-//        this.rabbitTemplate = rabbitTemplate;
-//        initRabbitTemplate();
-//    }
+    // @Autowired 不要自动注入，会循环依赖
+    private RabbitTemplate rabbitTemplate;
 
     @Primary
     @Bean
@@ -55,7 +50,6 @@ public class MyRabbitConfig {
     public void initRabbitTemplate() {
         // 设置确认回调
         rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
-
             /**
              *
              * @param correlationData 当前消息的唯一关联数据
@@ -64,6 +58,7 @@ public class MyRabbitConfig {
              */
             @Override
             public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+                // 成功投递到Broker
                 System.out.println("confirm...correlationData-" + correlationData + "cause-" + cause );
             }
         });
@@ -75,6 +70,7 @@ public class MyRabbitConfig {
              */
             @Override
             public void returnedMessage(ReturnedMessage returnedMessage) {
+                // 报错了，修改数据库消息日志表中消息的状态 -> 错误
                 System.out.println("FailedMessage[" + returnedMessage + "]");
             }
         });

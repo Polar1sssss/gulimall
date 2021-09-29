@@ -13,6 +13,7 @@ import com.hujtb.gulimall.product.feign.SearchFeignService;
 import com.hujtb.gulimall.product.feign.WareFeignService;
 import com.hujtb.gulimall.product.service.*;
 import com.hujtb.gulimall.product.vo.*;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,8 +82,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         return new PageUtils(page);
     }
 
+
+    @GlobalTransactional
     @Override
-    @Transactional
     public void saveSpuInfo(SpuSaveVo vo) {
         // 1、保存基本信息 pms_spu_info
         SpuInfoEntity spuInfoEntity = new SpuInfoEntity();
@@ -318,4 +320,11 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         }
     }
 
+    @Override
+    public SpuInfoEntity getSpuBySkuId(Long skuId) {
+        SkuInfoEntity byId = skuInfoService.getById(skuId);
+        Long spuId = byId.getSpuId();
+        SpuInfoEntity spuInfoEntity = this.baseMapper.selectById(spuId);
+        return spuInfoEntity;
+    }
 }

@@ -11,11 +11,11 @@ spring:
         dashboard: localhost:8333
   redis:
     host: 192.168.56.10
-  task:
-    execution:
-      pool:
-        core-size: 5
-        max-size: 50
+#  task:
+#    execution:
+#      pool:
+#        core-size: 5
+#        max-size: 50
   session:
     store-type: redis
   rabbitmq:

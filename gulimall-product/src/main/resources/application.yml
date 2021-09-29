@@ -63,7 +63,7 @@ feign:
   sentinel:
     enabled: true
 
-hujtb:
+gulimall:
   thread:
     core-size: 10
     max-size: 100

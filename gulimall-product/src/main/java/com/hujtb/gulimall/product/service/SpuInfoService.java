@@ -2,6 +2,7 @@ package com.hujtb.gulimall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hujtb.common.utils.PageUtils;
+import com.hujtb.common.utils.R;
 import com.hujtb.gulimall.product.entity.SpuInfoDescEntity;
 import com.hujtb.gulimall.product.entity.SpuInfoEntity;
 import com.hujtb.gulimall.product.vo.SpuSaveVo;
@@ -26,5 +27,7 @@ public interface SpuInfoService extends IService<SpuInfoEntity> {
     PageUtils queryPageByCondition(Map<String, Object> params);
 
     void up(Long spuId);
+
+    SpuInfoEntity getSpuBySkuId(Long skuId);
 }
 

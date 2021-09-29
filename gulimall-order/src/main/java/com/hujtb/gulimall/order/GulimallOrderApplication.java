@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * 使用RabbitMQ
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 2、给容器中自动配置了RabbitTemplate、AmqpAdmin、CachingConnnectionFactory
  * 3、@EnableRabbit
  */
+@EnableFeignClients
 @EnableRabbit
 @MapperScan("com.hujtb.gulimall.order.dao")
 @SpringBootApplication

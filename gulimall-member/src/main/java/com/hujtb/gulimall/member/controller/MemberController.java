@@ -105,7 +105,6 @@ public class MemberController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    //@RequiresPermissions("member:member:info")
     public R info(@PathVariable("id") Long id) {
         MemberEntity member = memberService.getById(id);
 

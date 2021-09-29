@@ -9,15 +9,24 @@ spring:
     port: 5672
     virtual-host: /
     publisher-confirm-type: correlated
+    # 开启发送端确认
+    publisher-confirms: true
+    # 开启消息抵达队列的消息确认
     publisher-returns: true
     template:
-      mandatory: true # 只要抵达队列，以异步发送的方式优先回调returnCallback
+      mandatory: true # 只要抵达队列，以异步发送的方式优先回调returnConfirm
     listener:
       simple:
         acknowledge-mode: manual
-
   jackson:
     date-format: "yyyy-MM-dd"
+  session:
+    store-type: redis
+  redis:
+    host: 192.168.56.10
+  mvc:
+    format:
+      date: yyyy-MM-dd HH:mm:ss
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -37,3 +46,9 @@ management:
 feign:
   sentinel:
     enabled: true
+
+gulimall:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10

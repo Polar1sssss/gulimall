@@ -598,7 +598,8 @@
     $.get("http://seckill.gulimall.com/getCurrentSeckillSkus", function (res) {
         if (res.data.length > 0) {
             res.data.forEach(function (item) {
-                $("<li onclick='toDetail(" + item.skuId + ")'></li>").append($("<img style='width: 130px; height: 130px' src='" + item.skuInfo.skuDefaultImg + "' />"))
+                $("<li onclick='toDetail(" + item.skuId + ")'></li>")
+                    .append($("<img style='width: 130px; height: 130px' src='" + item.skuInfo.skuDefaultImg + "' />"))
                     .append($("<p>" + item.skuInfo.skuTitle + "</p>"))
                     .append($("<span>" + item.seckillPrice + "</span>"))
                     .append($("<s>" + item.skuInfo.price + "</s>"))
@@ -607,6 +608,10 @@
         }
     })
 
+    /**
+     * 点击秒杀商品跳转到详情页
+     * @param skuId
+     */
     function toDetail(skuId) {
         location.href = "http://item.gulimall.com/" + skuId + ".html";
     }

@@ -1390,14 +1390,14 @@
     $(".addToCart").click(function () {
         let skuId = $(this).attr("skuId");
         let num = $("#productNum").val();
-        location.href = "http://cart.gulimall.com/addCartItem?skuId=" + skuId + "&num=" + num;
+        location.href = "http://cart.gulimall.com/addToCart?skuId=" + skuId + "&num=" + num;
         return false;
     });
 
     $(".seckill").click(function () {
         var isLogin = [[${session.loginUser != null}]];     //true
         if (isLogin) {
-            var killId = $(this).attr("sessionid") + "-" + $(this).attr("skuid");
+            var killId = $(this).attr("sessionid") + "_" + $(this).attr("skuid");
             var code = $(this).attr("code");
             var num = $("#productNum").val();
             location.href = "http://seckill.gulimall.com/kill?killId=" + killId + "&key=" + code + "&num=" + num;

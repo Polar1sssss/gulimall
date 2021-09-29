@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * @ConfigurationProperties：跟配置文件中有相同前缀的属性绑定
  */
-@ConfigurationProperties(prefix = "hujtb.thread")
+@ConfigurationProperties(prefix = "gulimall.thread")
 @Component
 @Data
 public class ThreadPoolProterties {
